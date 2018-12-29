@@ -1,0 +1,120 @@
+{extend name="default/shops/base" /}
+{block name="title"}参团人员列表-卖家中心{__block__}{/block}
+{block name="content"}
+<div class="wst-shop-head"><span>参团人员列表</span></div>
+<script type="text/javascript" src="__STATIC__/plugins/layer/layer.js?v={$v}"></script>
+<script type="text/javascript" src="__STATIC__/plugins/layer/skin/layer.css?v={$v}"></script>
+<!--<div class="wst-shop-tbar">-->
+  <!--<label>-->
+    <!--商品分类：-->
+    <!--<select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">-->
+        <!--<option value="">-请选择-</option>-->
+      <!--{volist name=":WSTShopCats(0)" id="vo"}-->
+            <!--<option value="{$vo['catId']}" >{$vo['catName']}</option>-->
+      <!--{/volist}-->
+    <!--</select>-->
+    <!--<select name="cat2" id="cat2" class="s-query"><option value="">-请选择-</option></select>-->
+  <!--</label>-->
+  <!--<label>-->
+    <!--商品名称：<input type="text" name="goodsName" id="goodsName" class="s-query" /><button class="s-btn" onclick="spellSaleByPage()">查询</button>-->
+  <!--</label>-->
+<!--</div>-->
+<div class="wst-shop-content"> 
+   <div class="s-menu">
+      <!--<a href='javascript:void(0);' onclick="benchDel('spellSale')" class="s-del"><span>删除</span></a>-->
+      <a href='{:url("home/goods/spellAdd")}' class="s-add"><span>新增</span></a>
+   </div> 
+   <table class='wst-list'>
+   <thead>
+   <tr>
+     <th width="10" >
+     <div class="checkbox-box-s checkbox-box-s-all">
+     <input style="margin-left:2px;" class="wst-checkbox-s" onclick="javascript:WST.checkChks(this,'.chk')" type='checkbox' id="all"/>
+     <label for="all"></label>
+     </div>
+     </th>
+     <th>订单号</th>
+     <th>用户名</th>
+     <th>参团时间</th>
+     <th>参团状态</th>
+     <th>收货方式</th>
+     <th>订单金额</th>
+     <th>操作</th>
+   </tr>
+   </thead>
+   <tbody id='list'></tbody>
+   <tfoot>
+     <tr align="center"><td colspan='10' id='pager'></td></tr>
+   </tfoot>
+       {foreach name="teamsData" item="vo"}
+   <tr>
+        <td> </td>
+        <td>{$vo.orderNo}</td>
+        <td>{$vo.loginName}</td>
+        <td>{$vo.createTime}</td>
+       <td>
+           {switch name="vo.orderStatus"}
+               {case value="-3"}用户拒收{/case}
+               {case value="-2"}未付款{/case}
+               {case value="0"}待发货{/case}
+               {case value="1"}配送中{/case}
+               {case value="2"}用户确认收货{/case}
+           {default /}NULL
+           {/switch}
+       </td>
+       <td>
+           {switch name="vo.deliverType"}
+           {case value="1"}自提{/case}
+           {case value="0"}送货上门{/case}
+           {default /}NULL
+           {/switch}
+       </td>
+       <td>{$vo.totalMoney}</td>
+       <td>
+           {switch name="type"}
+               {case value="0"}<a class="g-handle" href='#'>[拼团中]</a>{/case}
+               {case value="1"}<a class="g-handle" href='#'>[已成团]</a>{/case}
+               {case value="2"}
+                   {switch name="vo.isRefund"}
+                       {case value="1"}<a class="g-handle" href="javascript:;">[已退款]</a>{/case}
+                       {case value="0"}<a class="g-handle"  href="javascript:btn({$vo['orderId']},{$vo.team_id})">[退款]</a>{/case}
+                       {default /}NULL
+                   {/switch}
+               {/case}
+               {default /}NULL
+           {/switch}
+       </td>
+   </tr>
+{/foreach}
+
+  </table>
+  <div id='pager'></div>
+  <div class="s-menu">
+      <!--<a href='javascript:void(0);' onclick="benchDel('spellSale')" class="s-del"><span>删除</span></a>-->
+      <!--<a href='{:url("home/goods/spellAdd")}' class="s-add"><span>新增</span></a>-->
+   </div> 
+</div>
+{/block}  
+{block name="js"}
+<script type='text/javascript' src='__STYLE__/shops/goods/goods.js?v={$v}'></script>
+<script>
+    function btn(refund,team_id){
+        $.ajax({
+            url:"{:url('home/spell/refund')}",
+            type:"POST",
+            data:{'refund':refund,'team_id':team_id},
+            success: function(data) {
+                console.log(data);
+                if(data.status == 1){
+                    layer.msg(data.msg,{icon:6,skin:'#f0f0f0',shade:0.2});
+//                    window.location.reload();
+                    window.setTimeout("window.location.reload()",260);
+                } else {
+                    layer.msg(data.msg,{icon:0,skin:'#f0f0f0',time:1500,shade:0.2});
+                }
+            }
+        })
+    }
+
+</script>
+{/block}

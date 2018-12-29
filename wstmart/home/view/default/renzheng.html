@@ -1,0 +1,250 @@
+{extend name="default/users/base1" /}
+{block name="title"}首页-卖家中心{__block__}{/block}
+{block name="css"}
+{/block}
+{block name="content"}
+<script type="text/javascript" src="__STATIC__/plugins/layer/layer.js?v={$v}"></script>
+<script type="text/javascript" src="__STATIC__/plugins/layer/skin/layer.css?v={$v}"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=37f0869604ca86505487639427d52bf6"></script>
+    <form id="companyauth_form" >
+    <tr>
+        <th>公司名称<font color='red'>*</font>：</th>
+        <td>
+            <input type='text' name='ca_company_name' class='a-ipt' data-rule='公司名称:required;'/>
+
+        </td>
+    </tr><br>
+    <tr>
+        <th>联系人姓名<font color='red'>*</font>：</th>
+        <td><input type='text' name='ca_Identity_selection' class='a-ipt' data-rule='姓名:required;' /></td>
+    </tr><br>
+    <tr>
+        <th>联系人手机<font color='red'>*</font>：</th>
+        <td><input type='text' class='a-ipt' name="ca_Main_type" id='applyLinkTel' data-rule='手机:required;mobile'/></td>
+    </tr><br>
+    <tr>
+        <th>联系人身份证<font color='red'>*</font>：</th>
+        <td>
+            <input type='text' name='ca_Main_type_subclass' class='a-ipt' data-rule='身份证:required;IDcard'/>
+        </td>
+    </tr><br>
+        <tr>
+            <th>身份选择<font color='red'>*</font>：</th>
+            <td>
+                <select name="ca_isBrand">
+                    <option value="1">品牌</option>
+                    <option value="2" selected>非品牌</option>
+                    <option value="3">生鲜</option>
+                </select>
+            </td>
+        </tr><br><br>
+        <tr>
+            <th>生鲜 取货时间<font color='red'>*</font>：</th>
+            <td>
+                <input type="radio" name="pickupTime" value="24小时">24小时
+                <input type="radio" name="pickupTime" value="晚18:00-20:00">晚18:00-20:00
+                <input type="radio" name="pickupTime" value="购物后2小时取货">购物后2小时取货
+            </td>
+        </tr><br><br>
+        <tr>
+            <th>经营范围<font color='red'>*</font>：</th>
+            <td>
+                <select name="goods_cats" data-rule='经营范围:required;'>
+                    <option value="">请选择</option>
+                    {foreach name="$type" item='vo'}
+                        {if condition="$vo.catId neq '367'"}
+                           <option value="{$vo.catId}">{$vo.catName}</option>
+                        {/if}
+                    {/foreach}
+                </select>
+            </td>
+        </tr><br>
+    <tr>
+        <th>法人证件电子版<font color='red'>*</font>：</th>
+        <td>
+            <input type='file' name='images3'  id='file-3'/>
+        </td>
+    </tr><br>
+
+    <tr>
+        <th>营业执照电子版<font color='red'>*</font>：</th>
+        <td>
+            <input type='file' name='images4'  id='file-4' />
+            <br/><span class='tip'>用于认证过程中接收商城审核结果，请务必正确填写。</span>
+        </td>
+    </tr><br>
+        <!--<div class="item">-->
+            <!--<span class="label"><b class="ftx04">*</b>店铺地址：</span>-->
+            <!--<div class="fl item-ifo">-->
+                <!--<input id="shopAddress" name="shopAddress" class="text wstipt" tabindex="3" autocomplete="off" style="" type="text"/>-->
+                <!--<label id="shopAddress_succeed" ></label>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="item" style='height:440px;'>
+            <span class="label">&nbsp;</span>
+            <div class="fl item-ifo">
+                <div id="mapContainer" style='height:400px;width:660px;'>等待地图初始化...</div>
+                <div style='color:red'>(注意：提交开店申请之后店铺地址将无法修改)</div>
+                <div style='display:none'>
+                    <input type='text' id='latitude' class='wstipt' name='latitude' value="" />
+                    <input type='text' id='longitude' class='wstipt' name='longitude' value=""/>
+                    <input type='text' id='mapLevel' class='wstipt' name='mapLevel' value="13"/>
+                </div>
+            </div>
+        </div>
+    <!--<input type='button' class="btn-submit" name='applyLinkEmail' value="提交"/>-->
+    <a class="btn-submit" id="submit">提交</a>
+    </form>
+<style>
+    .btn-submit {
+        width: 100px;
+        height: 32px;
+        line-height: 32px;
+        display: inline-block;
+        position: relative;
+        background: #e45050;
+        color: #fff;
+        text-align: center;
+        font-family: 'Ubuntu',sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 3px;
+        overflow: hidden;
+        -webkit-transition: all .15s ease-in;
+        transition: all .15s ease-in;
+    }
+</style>
+
+<script>
+    $(function(){
+        ShopMapInit();
+
+    })
+    var shopMap = null;
+    var toolBar = null;
+    function ShopMapInit(option){
+        var opts = {zoom:$('#mapLevel').val(),longitude:$('#longitude').val(),latitude:$('#latitude').val()};
+        if(shopMap)return;
+        $('#shopMap').show();
+        shopMap = new AMap.Map('mapContainer', {
+            view: new AMap.View2D({
+                zoom:opts.zoom
+            })
+        });
+        if(opts.longitude!='' && opts.latitude){
+            shopMap.setZoomAndCenter(opts.zoom, new AMap.LngLat(opts.longitude, opts.latitude));
+            var marker = new AMap.Marker({
+                position: new AMap.LngLat(opts.longitude, opts.latitude), //基点位置
+                icon:"http://webapi.amap.com/images/marker_sprite.png"
+            });
+            marker.setMap(shopMap);
+        }
+        shopMap.plugin(["AMap.ToolBar"],function(){
+            toolBar = new AMap.ToolBar();
+            shopMap.addControl(toolBar);
+            toolBar.show();
+        });
+
+        AMap.event.addListener(shopMap,'click',function(e){
+            shopMap.clearMap();
+            $('#longitude').val(e.lnglat.getLng());
+            $('#latitude').val(e.lnglat.getLat());
+            var marker = new AMap.Marker({
+                position: e.lnglat, //基点位置
+                icon:"http://webapi.amap.com/images/marker_sprite.png"
+            });
+            marker.setMap(shopMap);
+        });
+        AMap.event.addListener(shopMap,'zoomchange',function(e){
+            $('#mapLevel').val(this.getZoom());
+        })
+    }
+    $(function(){
+        // 上传 营业证
+        $("#file-3").change(function() {
+            var formData = new FormData($("#companyauth_form")[0]);
+
+//            alert(555);
+            $.ajax({
+                url: "{:url('Shoprenzheng/upidentity3')}" ,
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+//                    alert(returndata);
+                    var img=JSON.parse(returndata);
+//                    img1="__ROOT__"+img;
+//                    $("#yingye").attr("src",img1);
+//                    $("#yingye").attr("width","212");
+//                    $("#yingye").attr("height","150");
+                    $("#file-3").after('<input type="hidden" name="ca_Business_license" value="'+img+'"/>');
+                },
+                error: function (returndata) {
+                    layer.msg('上传错误，请刷新页面重试',{icon:5,time:2000,shade:0.2});
+                }
+            });
+        });
+        // 上传 开户许可证
+        $("#file-4").change(function() {
+            var formData = new FormData($("#companyauth_form")[0]);
+            $.ajax({
+                url: "{:url('Shoprenzheng/upidentity4')}" ,
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                    var img=JSON.parse(returndata);
+//                    img1="__ROOT__"+img;
+//                    $("#kaihu").attr("src",img1);
+//                    $("#kaihu").attr("width","212");
+//                    $("#kaihu").attr("height","150");
+                    $("#file-4").after('<input type="hidden" name="ca_Open_an_account" value="'+img+'"/>');
+                },
+                error: function (returndata) {
+                    layer.msg('上传错误，请刷新页面重试',{icon:5,time:2000,shade:0.2});
+                }
+            });
+        })
+        //上传 企业认证
+        $("#submit").click(function(){
+//            alert($('#mapLevel').val());
+            var formData = new FormData($("#companyauth_form")[0]);
+            // console.log(formData);
+            $.ajax({
+                url: "{:url('Shoprenzheng/companyCertified')}" ,
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                    if(data.status==1){
+                        layer.msg(data.msg,{icon:1,time:2000,shade:0.2});
+                    }else{
+                        layer.msg(data.msg,{icon:2,time:2000,shade:0.2});
+                    }
+                },
+                error: function (data) {
+//                    console.log(data);
+                    layer.msg('上传错误，请刷新页面重试',{icon:5,time:2000,shade:0.2});
+                }
+            });
+        });
+    })
+
+</script>
+
+{/block}
+{block name="footer"}
+{include file="default/footer" /}
+{/block}
+<!--{block name="js"}<script type='text/javascript' src='__STYLE__/shops/shopcats/shopcats.js?v={$v}'></script>{/block}-->

@@ -1,0 +1,90 @@
+{extend name="default/shops/base" /}
+{block name="title"}拼团团长列表-卖家中心{__block__}{/block}
+{block name="content"}
+<div class="wst-shop-head"><span>拼团团长列表</span></div>
+<!--<div class="wst-shop-tbar">-->
+  <!--<label>-->
+    <!--商品分类：-->
+    <!--<select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">-->
+        <!--<option value="">-请选择-</option>-->
+      <!--{volist name=":WSTShopCats(0)" id="vo"}-->
+            <!--<option value="{$vo['catId']}" >{$vo['catName']}</option>-->
+      <!--{/volist}-->
+    <!--</select>-->
+    <!--<select name="cat2" id="cat2" class="s-query"><option value="">-请选择-</option></select>-->
+  <!--</label>-->
+  <!--<label>-->
+    <!--商品名称：<input type="text" name="goodsName" id="goodsName" class="s-query" /><button class="s-btn" onclick="spellSaleByPage()">查询</button>-->
+  <!--</label>-->
+<!--</div>-->
+<div class="wst-shop-content"> 
+   <div class="s-menu">
+      <!--<a href='javascript:void(0);' onclick="benchDel('spellSale')" class="s-del"><span>删除</span></a>-->
+      <a href='{:url("home/goods/spellAdd")}' class="s-add"><span>新增</span></a>
+   </div> 
+   <table class='wst-list'>
+   <thead>
+   <tr>
+     <th width="10" >
+     <div class="checkbox-box-s checkbox-box-s-all">
+     <input style="margin-left:2px;" class="wst-checkbox-s" onclick="javascript:WST.checkChks(this,'.chk')" type='checkbox' id="all"/>
+     <label for="all"></label>
+     </div>
+     </th>
+     <th>ID</th>
+     <th>团长ID</th>
+     <th>用户名</th>
+     <th>开团时间</th>
+     <th>参团人数</th>
+     <th>参团状态</th>
+     <!--<th>热销</th>-->
+     <!--<th>销量</th>-->
+     <!--<th>库存</th>-->
+     <th width="150">操作</th>
+   </tr>
+   </thead>
+   <tbody id='list'></tbody>
+   <tfoot>
+     <tr align="center"><td colspan='10' id='pager'></td></tr>
+   </tfoot>
+       {foreach name="teamsData" item="vo"}
+   <tr>
+        <td> </td>
+        <td>{$vo.id}</td>
+        <td>{$vo.userId}</td>
+        <td>{$vo.loginName}</td>
+        <td>{$vo.addtime|date="Y-m-d H:i",###}</td>
+        <td>{$vo.join_num}</td>
+       <td>
+           {switch name="vo.status"}
+           {case value="0"}拼团中{/case}
+           {case value="1"}已成团{/case}
+           {case value="2"}拼团失败{/case}
+           {default /}NULL
+           {/switch}
+       </td>
+       <!--<td>=</td>-->
+       <!--<td>=</td>-->
+       <!--<td>=</td>-->
+      <td>
+         <a class="g-handle" href="{:url('home/spell/detail')}?team_id={$vo['id']}&goodsId={$vo['goods_id']}">[参团人员]</a>
+         <!--<a class="g-handle" href='javascript:del({{d[i]['goodsId']}},"spellSale")'>[删除]</a>-->
+      </td>
+   </tr>
+{/foreach}
+
+  </table>
+  <div id='pager'></div>
+  <div class="s-menu">
+      <!--<a href='javascript:void(0);' onclick="benchDel('spellSale')" class="s-del"><span>删除</span></a>-->
+      <!--<a href='{:url("home/goods/spellAdd")}' class="s-add"><span>新增</span></a>-->
+   </div> 
+</div>
+{/block}  
+{block name="js"}
+<script type='text/javascript' src='__STYLE__/shops/goods/goods.js?v={$v}'></script>
+<!--<script>-->
+<!--$(function(){spellSaleByPage()})-->
+
+<!--</script>-->
+{/block}

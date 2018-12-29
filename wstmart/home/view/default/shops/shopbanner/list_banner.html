@@ -1,0 +1,119 @@
+{extend name="default/shops/base" /}
+{block name="title"}广告列表-卖家中心{__block__}{/block}
+{block name="content"}
+<div class="wst-shop-head"><span>广告列表</span></div>
+<div class="wst-shop-tbar">
+  <!--<label>-->
+    <!--商品分类：-->
+    <!--<select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">-->
+        <!--<option value="">-请选择-</option>-->
+      <!--{volist name=":WSTShopCats(0)" id="vo"}-->
+            <!--<option value="{$vo['catId']}" >{$vo['catName']}</option>-->
+      <!--{/volist}-->
+    <!--</select>-->
+    <!--<select name="cat2" id="cat2" class="s-query"><option value="">-请选择-</option></select>-->
+  <!--</label>-->
+  <!--<label>-->
+    <!--到期时间：<input type="text" name="goodsName" id="expiryTime" placeholder="点击选择时间" class="s-query" /><button class="s-btn" onclick="saleByPage()">托管</button>-->
+  <!--</label> -->
+    <label>
+        托管期限：<select id="monthNum" class="j-bareas1 s-query" >
+                        <option value="1">1个月</option>
+                        <option value="2">2个月</option>
+                        <option value="3">3个月</option>
+                        <option value="4">4个月</option>
+                        <option value="5">5个月</option>
+                        <option value="6">6个月</option>
+                        <!--<option value="7">7</option>-->
+                        <!--<option value="8">8</option>-->
+                        <!--<option value="9">9</option>-->
+                        <!--<option value="10">10</option>-->
+                        <!--<option value="11">11</option>-->
+                        <!--<option value="12">12</option>-->
+                  </select>
+        <button class="s-btn" onclick="saleByPage()">托管</button>注：托管从次月开始
+  </label>
+</div>
+<div class="wst-shop-content">
+   <div class="s-menu">
+      <!--<a href='javascript:void(0);' onclick="benchDel('spellSale')" class="s-del"><span>删除</span></a>-->
+      <a href='{:url("home/Shopbanner/addBanner")}' class="s-add"><span>新增</span></a>
+      <!--<a href='{:url("home/Shopbanner/addBanner")}' class="s-rec" title="点击托管广告"><span>托管</span></a>-->
+   </div>
+   <table class='wst-list'>
+   <thead>
+   <tr>
+     <th width="10" >
+     <div class="checkbox-box-s checkbox-box-s-all">
+     <input style="margin-left:2px;" class="wst-checkbox-s" onclick="javascript:WST.checkChks(this,'.chk')" type='checkbox' id="all"/>
+     <label for="all"></label>
+     </div>
+     </th>
+     <th>ID</th>
+     <th>广告图片</th>
+     <!--<th>广告链接</th>-->
+     <th>添加时间</th>
+     <th width="150">操作</th>
+   </tr>
+   </thead>
+   <tbody id='list'></tbody>
+   <tfoot>
+     <tr align="center"><td colspan='10' id='pager'></td></tr>
+   </tfoot>
+       {foreach name="teamsData" item="vo"}
+   <tr>
+        <td> </td>
+        <td>{$vo.adId}</td>
+        <td><img class="j-lazyGoodsImg" data-original="__ROOT__/{$vo.adFile}"  src="__ROOT__/{$vo.adFile}"></td>
+        <!--<td>{$vo.adURL}</td>-->
+        <td>{$vo.createTime}</td>
+       <!--<td>=</td>-->
+       <!--<td>=</td>-->
+       <!--<td>=</td>-->
+      <td>
+          {empty name="$tuoguan"}
+              <a class="g-handle" href='javascript:dele({$vo.adId})'>[删除]</a>
+              <a class="g-handle" href='{:url("home/Shopbanner/Edit")}?id={$vo.adId}'>[编辑]</a>
+          {else/}
+              <a class="g-handle" href='javascript:;'>[已托管]</a>
+          {/empty}
+      </td>
+   </tr>
+{/foreach}
+
+  </table>
+  <div id='pager'></div>
+  <div class="s-menu">
+      <!--<a href='javascript:void(0);' onclick="benchDel('spellSale')" class="s-del"><span>删除</span></a>-->
+      <!--<a href='{:url("home/goods/spellAdd")}' class="s-add"><span>新增</span></a>-->
+   </div>
+</div>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__STYLE__/shops/shopbanner/banner.js?v={$v}'></script>
+<script type="text/javascript" src="__STATIC__/plugins/layer/laydate.js?v={$v}"></script>
+
+<script>
+    /*日期插件 托管到期时间*/
+    // laydate({
+    //     elem: '#expiryTime', //需显示日期的元素选择器
+    //     event: 'click', //触发事件
+    //     format: 'YYYY-MM-DD', //日期格式
+    //     istime: false, //是否开启时间选择
+    //     isclear: true, //是否显示清空
+    //     istoday: true, //是否显示今天
+    //     issure: true,  //是否显示确认
+    //     festival: true, //是否显示节日
+    //     min: laydate.now(), //最小日期
+    //     max: '2099-12-31', //最大日期
+    //     fixed: false, //是否固定在可视区域
+    //     zIndex: 99999999 //css z-index
+    // });
+</script>
+<style>
+    .j-lazyGoodsImg {
+        max-width: 60px;
+        max-height: 60px;
+    }
+</style>
+{/block}

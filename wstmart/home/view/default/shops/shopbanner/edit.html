@@ -1,0 +1,88 @@
+{extend name="default/shops/base" /}
+{block name="title"}广告信息-卖家中心{__block__}{/block}
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/plugins/webuploader/webuploader.css?v={$v}" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/plugins/webuploader/batchupload.css?v={$v}" />
+<link href="__STATIC__/plugins/validator/jquery.validator.css?v={$v}" rel="stylesheet">
+{/block}
+{block name="content"}
+<style>
+label{margin-right:10px;}
+#specsAttrBox .webuploader-container{width:80px;height:25px;line-height:25px;overflow:hidden;}
+</style>
+<div id='tab' class="wst-tab-box">
+	<ul class="wst-tab-nav">
+	   <li>广告信息</li>
+	   <!--<li>规格属性</li>-->
+	   <!--<li>商品相册</li>-->
+	</ul>
+    <div class="wst-tab-content" style='width:99%;margin-bottom: 10px;border:0px;'>
+      <form id='editform' autocomplete='off'>
+        <div class="wst-tab-item" style="position: relative;">
+            <input type='hidden' id='adId' class='j-ipt' value='{$object["adId"]}'/>
+            <table class='wst-form'>
+                <tr>
+                    <th width='50'>广告标题<font color='red'>*</font>：</th>
+                    <td width='300'>
+                        <!--<input type='text' class='j-ipt' id='adURL' value='{if $object["adId"]>0}{$object["adURL"]}{/if}' maxLength='100' data-rule='广告标题:required;'/>-->
+                        <input type='text' class='j-ipt' id='adName' value='{if $object["adId"]>0}{$object["adName"]}{/if}' maxLength='100' data-rule='广告标题:required;'/>
+                    </td>
+                </tr>
+                <!--<tr>-->
+                    <!--<th>广告位置<font color='red'>*</font>：</th>-->
+                    <!--<td>-->
+                        <!--<select id="adPositionId" name="adPositionId" class='j-ipt' data-rule='广告位置:required;'>-->
+                            <!--<option value=''>请选择</option>-->
+                            <!--{volist name="type" id='vo'}-->
+                            <!--<option  value="{$vo['positionId']}">{$vo['positionName']}</option>-->
+                            <!--{/volist}-->
+                        <!--</select>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <tr>
+                    <th>广告图：<font color='red'>*</font>：</th>
+                    <td>
+                        <div id='goodsImgBox'>
+                            <img src='__ROOT__/{$object["adFile"]}' id='preview' style="max-width: 150px; max-height: 150px;">
+                        </div>
+                        <div id='goodsImgPicker'>请上传广告图片</div><span id='uploadMsg'></span>
+                        <input type='hidden' id='adFile' class='j-ipt' data-target='#msg_goodsImg' value='{if $object["adId"]>0}{$object["adFile"]}{/if}' data-rule="广告图片: required;"/>
+                        <span class='msg-box' id='msg_goodsImg'></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' align='center' style='text-align:center'>
+                        {empty name="$tuoguan"}
+                        <button class="s-btn" onclick='javascript:bannerSave()' type='button'>保存</button>
+                        {else/}
+                        <button class="s-btn"  type='button'>保存</button>
+                        {/empty}
+                        <button type="reset" class="s-btn">重置</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+     </form>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<style>
+    .webuploader-pick {background: #e45050 none repeat scroll 0 0;}
+    #goodsImgPicker div:nth-child(2){width:75px!important;height:100%!important;}
+</style>
+<script type='text/javascript' src='__STATIC__/plugins/webuploader/webuploader.js?v={$v}'></script>
+<script src="__STATIC__/plugins/kindeditor/kindeditor.js?v={$v}" type="text/javascript" ></script>
+<script type="text/javascript" src="__STATIC__/plugins/validator/jquery.validator.js?v={$v}"></script>
+<script type="text/javascript" src="__STATIC__/plugins/validator/local/zh-CN.js?v={$v}"></script>
+<script type='text/javascript' src='__STATIC__/plugins/webuploader/batchupload.js?v={$v}'></script>
+<script type="text/javascript" src="__STATIC__/plugins/layer/laydate.js?v={$v}"></script>
+<script type='text/javascript' src='__STYLE__/shops/shopbanner/banner.js?v={$v}'></script>
+
+<script>
+    var initBatchUpload = false,editor1 = null,specNum = 0;
+$(function(){
+    initEdit();
+});
+</script>
+{/block}

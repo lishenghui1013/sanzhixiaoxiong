@@ -1,0 +1,692 @@
+[ 2018-12-23T22:46:49+08:00 ] 172.24.163.37 139.224.116.230 GET /sanzhixiaoxiong/admin/index/main.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/main.html [运行时间：0.024334s][吞吐率：41.09req/s] [内存消耗：2,545.41kb] [文件加载：46]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'main',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.010097s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000438s ] mysql:dbname=sanzhixiaoxiong;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `szx_sys_configs` [ RunTime:0.000826s ]
+[ sql ] [ SQL ] SELECT `fieldCode`,`fieldValue` FROM `szx_sys_configs` [ RunTime:0.000334s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `szx_styles` [ RunTime:0.000619s ]
+[ sql ] [ SQL ] SELECT `styleSys`,`stylePath`,`id` FROM `szx_styles` WHERE  `isUse` = 1 [ RunTime:0.000279s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `szx_datas` [ RunTime:0.000613s ]
+[ sql ] [ SQL ] SELECT `dataVal` FROM `szx_datas` WHERE  `catId` = 3 [ RunTime:0.000255s ]
+
+---------------------------------------------------------------
+[ 2018-12-23T22:46:49+08:00 ] 172.24.163.37 139.224.116.230 GET /sanzhixiaoxiong/admin/index/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/login.html [运行时间：0.025703s][吞吐率：38.91req/s] [内存消耗：2,884.79kb] [文件加载：54]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001158s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenLoginStatus @action_begin [ RunTime:0.000549s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenPrivilege @action_begin [ RunTime:0.000130s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenOperate @action_begin [ RunTime:0.000104s ]
+[ info ] [ RUN ] wstmart\admin\controller\Index->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/admin/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/admin/view/login.html [ array (
+  0 => 'v',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000327s ] mysql:dbname=sanzhixiaoxiong;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `szx_orders` [ RunTime:0.000855s ]
+[ sql ] [ SQL ] SELECT `o`.`orderId`,`o`.`orderNo`,`o`.`userId`,`o`.`shopId`,s.userId shopUserId FROM `szx_orders` `o` LEFT JOIN `szx_shops` `s` ON `o`.`shopId`=`s`.`shopId` WHERE  (  o.createTime<'2018-12-23 16:46:49' and o.orderStatus=-2 and o.dataFlag=1 and o.payType=1 and o.isPay=0 ) [ RunTime:0.000543s ]
+[ sql ] [ SQL ] SELECT `orderId`,`orderNo`,`shopId`,`userId`,`orderScore` FROM `szx_orders` WHERE  (  deliveryTime<'2018-12-13 00:00:00' and orderStatus=1 and dataFlag=1 ) [ RunTime:0.000298s ]
+[ sql ] [ SQL ] SELECT `orderId`,`userId`,`orderScore`,`shopId`,`orderNo` FROM `szx_orders` WHERE  (  receiveTime<'2018-12-16 00:00:00' and orderStatus=2 and dataFlag=1 and isAppraise=0 ) [ RunTime:0.000275s ]
+
+---------------------------------------------------------------
+[ 2018-12-23T22:48:46+08:00 ] 172.24.163.37 101.132.106.40 GET /sanzhixiaoxiong/
+[ log ] 39.104.201.147/sanzhixiaoxiong/ [运行时间：0.020546s][吞吐率：48.67req/s] [内存消耗：2,292.98kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.005887s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000127s ]
+[ info ] [ RUN ] wstmart\home\controller\Index->index[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Index.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T22:48:46+08:00 ] 172.24.163.37 101.132.106.40 GET /sanzhixiaoxiong/home/shops/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/home/shops/login.html [运行时间：0.020559s][吞吐率：48.64req/s] [内存消耗：2,342.92kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'shops',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.005826s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000117s ]
+[ info ] [ RUN ] wstmart\home\controller\Shops->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Shops.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/home/view/default/shop_login.html [ array (
+  0 => 'v',
+  1 => 'loginName',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T22:55:34+08:00 ] 172.24.163.37 139.224.15.159 GET /sanzhixiaoxiong/admin/index/getverify.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/getverify.html [运行时间：0.017417s][吞吐率：57.42req/s] [内存消耗：1,939.35kb] [文件加载：43]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'getverify',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001236s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenLoginStatus @action_begin [ RunTime:0.000629s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenPrivilege @action_begin [ RunTime:0.000127s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenOperate @action_begin [ RunTime:0.000102s ]
+[ info ] [ RUN ] wstmart\admin\controller\Base->getVerify[ /www/wwwroot/sanzhixiaoxiong/wstmart/admin/controller/Base.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T22:57:18+08:00 ] 172.24.163.37 47.92.102.179 GET /sanzhixiaoxiong/admin/index/getverify.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/getverify.html [运行时间：0.017104s][吞吐率：58.47req/s] [内存消耗：1,939.35kb] [文件加载：43]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'getverify',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001247s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenLoginStatus @action_begin [ RunTime:0.000614s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenPrivilege @action_begin [ RunTime:0.000131s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenOperate @action_begin [ RunTime:0.000103s ]
+[ info ] [ RUN ] wstmart\admin\controller\Base->getVerify[ /www/wwwroot/sanzhixiaoxiong/wstmart/admin/controller/Base.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:03:49+08:00 ] 172.24.163.37 47.96.12.13 GET /sanzhixiaoxiong/admin/userranks/index.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/userranks/index.html [运行时间：0.015207s][吞吐率：65.76req/s] [内存消耗：1,906.59kb] [文件加载：40]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'userranks',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001160s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:03:50+08:00 ] 172.24.163.37 47.96.12.13 GET /sanzhixiaoxiong/admin/index/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/login.html [运行时间：0.025892s][吞吐率：38.62req/s] [内存消耗：2,884.79kb] [文件加载：54]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001238s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenLoginStatus @action_begin [ RunTime:0.000552s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenPrivilege @action_begin [ RunTime:0.000126s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenOperate @action_begin [ RunTime:0.000114s ]
+[ info ] [ RUN ] wstmart\admin\controller\Index->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/admin/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/admin/view/login.html [ array (
+  0 => 'v',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000400s ] mysql:dbname=sanzhixiaoxiong;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `szx_orders` [ RunTime:0.000851s ]
+[ sql ] [ SQL ] SELECT `o`.`orderId`,`o`.`orderNo`,`o`.`userId`,`o`.`shopId`,s.userId shopUserId FROM `szx_orders` `o` LEFT JOIN `szx_shops` `s` ON `o`.`shopId`=`s`.`shopId` WHERE  (  o.createTime<'2018-12-23 17:03:50' and o.orderStatus=-2 and o.dataFlag=1 and o.payType=1 and o.isPay=0 ) [ RunTime:0.000524s ]
+[ sql ] [ SQL ] SELECT `orderId`,`orderNo`,`shopId`,`userId`,`orderScore` FROM `szx_orders` WHERE  (  deliveryTime<'2018-12-13 00:00:00' and orderStatus=1 and dataFlag=1 ) [ RunTime:0.000292s ]
+[ sql ] [ SQL ] SELECT `orderId`,`userId`,`orderScore`,`shopId`,`orderNo` FROM `szx_orders` WHERE  (  receiveTime<'2018-12-16 00:00:00' and orderStatus=2 and dataFlag=1 and isAppraise=0 ) [ RunTime:0.000266s ]
+
+---------------------------------------------------------------
+[ 2018-12-23T23:05:53+08:00 ] 172.24.163.37 47.92.137.155 GET /sanzhixiaoxiong/admin/index/getverify.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/getverify.html [运行时间：0.016151s][吞吐率：61.92req/s] [内存消耗：1,939.35kb] [文件加载：43]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'getverify',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001123s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenLoginStatus @action_begin [ RunTime:0.000587s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenPrivilege @action_begin [ RunTime:0.000124s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenOperate @action_begin [ RunTime:0.000099s ]
+[ info ] [ RUN ] wstmart\admin\controller\Base->getVerify[ /www/wwwroot/sanzhixiaoxiong/wstmart/admin/controller/Base.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:07:18+08:00 ] 172.24.163.37 118.31.15.238 GET /sanzhixiaoxiong/
+[ log ] 39.104.201.147/sanzhixiaoxiong/ [运行时间：0.020496s][吞吐率：48.79req/s] [内存消耗：2,292.98kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.005921s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000124s ]
+[ info ] [ RUN ] wstmart\home\controller\Index->index[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Index.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:07:18+08:00 ] 172.24.163.37 118.31.15.238 GET /sanzhixiaoxiong/home/shops/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/home/shops/login.html [运行时间：0.021222s][吞吐率：47.12req/s] [内存消耗：2,342.92kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'shops',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.005816s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000122s ]
+[ info ] [ RUN ] wstmart\home\controller\Shops->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Shops.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/home/view/default/shop_login.html [ array (
+  0 => 'v',
+  1 => 'loginName',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:17:08+08:00 ] 172.24.163.37 101.132.188.111 GET /sanzhixiaoxiong/
+[ log ] 39.104.201.147/sanzhixiaoxiong/ [运行时间：0.020674s][吞吐率：48.37req/s] [内存消耗：2,292.98kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.006153s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000121s ]
+[ info ] [ RUN ] wstmart\home\controller\Index->index[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Index.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:17:08+08:00 ] 172.24.163.37 101.132.188.111 GET /sanzhixiaoxiong/home/shops/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/home/shops/login.html [运行时间：0.021573s][吞吐率：46.35req/s] [内存消耗：2,342.92kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'shops',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.005970s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000120s ]
+[ info ] [ RUN ] wstmart\home\controller\Shops->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Shops.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/home/view/default/shop_login.html [ array (
+  0 => 'v',
+  1 => 'loginName',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:18:08+08:00 ] 172.24.163.37 106.14.204.78 GET /sanzhixiaoxiong/
+[ log ] 39.104.201.147/sanzhixiaoxiong/ [运行时间：0.019897s][吞吐率：50.26req/s] [内存消耗：2,292.98kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.005841s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000139s ]
+[ info ] [ RUN ] wstmart\home\controller\Index->index[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Index.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:18:08+08:00 ] 172.24.163.37 106.14.204.78 GET /sanzhixiaoxiong/home/shops/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/home/shops/login.html [运行时间：0.020419s][吞吐率：48.97req/s] [内存消耗：2,342.92kb] [文件加载：51]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'shops',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\InitConfig @module_init [ RunTime:0.005540s ]
+[ info ] [ BEHAVIOR ] Run wstmart\home\behavior\ListenProtectedUrl @action_begin [ RunTime:0.000118s ]
+[ info ] [ RUN ] wstmart\home\controller\Shops->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/home/controller/Shops.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/home/view/default/shop_login.html [ array (
+  0 => 'v',
+  1 => 'loginName',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:24:55+08:00 ] 172.24.163.37 47.92.132.229 GET /sanzhixiaoxiong/admin/index/main.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/main.html [运行时间：0.014881s][吞吐率：67.20req/s] [内存消耗：1,916.45kb] [文件加载：40]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'main',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001136s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:24:55+08:00 ] 172.24.163.37 47.92.132.229 GET /sanzhixiaoxiong/admin/index/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/login.html [运行时间：0.024847s][吞吐率：40.25req/s] [内存消耗：2,884.79kb] [文件加载：54]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001171s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenLoginStatus @action_begin [ RunTime:0.000611s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenPrivilege @action_begin [ RunTime:0.000130s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenOperate @action_begin [ RunTime:0.000100s ]
+[ info ] [ RUN ] wstmart\admin\controller\Index->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/admin/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/admin/view/login.html [ array (
+  0 => 'v',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000406s ] mysql:dbname=sanzhixiaoxiong;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `szx_orders` [ RunTime:0.000842s ]
+[ sql ] [ SQL ] SELECT `o`.`orderId`,`o`.`orderNo`,`o`.`userId`,`o`.`shopId`,s.userId shopUserId FROM `szx_orders` `o` LEFT JOIN `szx_shops` `s` ON `o`.`shopId`=`s`.`shopId` WHERE  (  o.createTime<'2018-12-23 17:24:55' and o.orderStatus=-2 and o.dataFlag=1 and o.payType=1 and o.isPay=0 ) [ RunTime:0.000491s ]
+[ sql ] [ SQL ] SELECT `orderId`,`orderNo`,`shopId`,`userId`,`orderScore` FROM `szx_orders` WHERE  (  deliveryTime<'2018-12-13 00:00:00' and orderStatus=1 and dataFlag=1 ) [ RunTime:0.000292s ]
+[ sql ] [ SQL ] SELECT `orderId`,`userId`,`orderScore`,`shopId`,`orderNo` FROM `szx_orders` WHERE  (  receiveTime<'2018-12-16 00:00:00' and orderStatus=2 and dataFlag=1 and isAppraise=0 ) [ RunTime:0.000290s ]
+
+---------------------------------------------------------------
+[ 2018-12-23T23:25:53+08:00 ] 172.24.163.37 47.92.146.203 GET /sanzhixiaoxiong/admin/index/main.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/main.html [运行时间：0.015385s][吞吐率：65.00req/s] [内存消耗：1,916.45kb] [文件加载：40]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'main',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001208s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-12-23T23:25:53+08:00 ] 172.24.163.37 47.92.146.203 GET /sanzhixiaoxiong/admin/index/login.html
+[ log ] 39.104.201.147/sanzhixiaoxiong/admin/index/login.html [运行时间：0.025401s][吞吐率：39.37req/s] [内存消耗：2,884.79kb] [文件加载：54]
+[ info ] [ LANG ] /www/wwwroot/sanzhixiaoxiong/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => '39.104.201.147',
+  'user-agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\InitConfig @module_init [ RunTime:0.001188s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'WSTMART_',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenLoginStatus @action_begin [ RunTime:0.000575s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenPrivilege @action_begin [ RunTime:0.000127s ]
+[ info ] [ BEHAVIOR ] Run wstmart\admin\behavior\ListenOperate @action_begin [ RunTime:0.000100s ]
+[ info ] [ RUN ] wstmart\admin\controller\Index->login[ /www/wwwroot/sanzhixiaoxiong/wstmart/admin/controller/Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] /www/wwwroot/sanzhixiaoxiong/wstmart/admin/view/login.html [ array (
+  0 => 'v',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000440s ] mysql:dbname=sanzhixiaoxiong;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `szx_orders` [ RunTime:0.000860s ]
+[ sql ] [ SQL ] SELECT `o`.`orderId`,`o`.`orderNo`,`o`.`userId`,`o`.`shopId`,s.userId shopUserId FROM `szx_orders` `o` LEFT JOIN `szx_shops` `s` ON `o`.`shopId`=`s`.`shopId` WHERE  (  o.createTime<'2018-12-23 17:25:53' and o.orderStatus=-2 and o.dataFlag=1 and o.payType=1 and o.isPay=0 ) [ RunTime:0.000495s ]
+[ sql ] [ SQL ] SELECT `orderId`,`orderNo`,`shopId`,`userId`,`orderScore` FROM `szx_orders` WHERE  (  deliveryTime<'2018-12-13 00:00:00' and orderStatus=1 and dataFlag=1 ) [ RunTime:0.000306s ]
+[ sql ] [ SQL ] SELECT `orderId`,`userId`,`orderScore`,`shopId`,`orderNo` FROM `szx_orders` WHERE  (  receiveTime<'2018-12-16 00:00:00' and orderStatus=2 and dataFlag=1 and isAppraise=0 ) [ RunTime:0.000266s ]
+
+---------------------------------------------------------------

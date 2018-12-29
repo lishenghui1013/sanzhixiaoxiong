@@ -1,0 +1,205 @@
+{extend name="default/shops/base" /}
+{block name="title"}众筹列表-卖家中心{__block__}{/block}
+{block name="content"}
+<div class="wst-shop-head"><span>众筹列表</span></div>
+<div class="wst-shop-tbar">
+  <label>
+    <!--商品分类：
+     <select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">
+        <option value="">-请选择-</option>
+      {volist name=":WSTShopCats(0)" id="vo"}
+            <option value="{$vo['catId']}" >{$vo['catName']}</option>
+      {/volist}
+    </select>
+    <select name="cat2" id="cat2" class="s-query"><option value="">-请选择-</option></select> -->
+  </label>
+  <label>
+    众筹名称：<input type="text" name="goodsName" id="key" class="s-query" />
+	<button class="s-btn" onclick="getraise()">查询</button>
+  </label>
+</div>
+<div class="wst-shop-content"> 
+   <div class="s-menu">
+      <a href='javascript:;' onclick="changeSales(0,'sale')" class="s-sale"><span>下架</span></a>
+     
+      <a href='javascript:void(0);' onclick="raiseDel('sale')" class="s-del"><span>删除</span></a>
+      <a href='{:url("home/raise/addraise")}' class="s-add"><span>新增</span></a>
+   </div> 
+   <table class='wst-list'>
+   <thead>
+   <tr>
+     <th width="10" >
+     <div class="checkbox-box-s checkbox-box-s-all">
+     <input style="margin-left:2px;" class="wst-checkbox-s" onclick="javascript:WST.checkChks(this,'.chk')" type='checkbox' id="all"/>
+     <label for="all"></label>
+     </div>
+     </th>
+     <th>众筹名称</th>
+     <th>众筹编号</th>
+     <th>众筹总额</th>
+     <th>众筹单价</th>
+     <th>开始时间</th>
+     <th>结束时间</th>
+     
+     <th width="150">操作</th>
+   </tr>
+   </thead>
+   <tbody id='list'></tbody>
+   <tfoot>
+     <tr align="center"><td colspan='10' id='pager'></td></tr>
+   </tfoot>
+   <script id="tblist" type="text/html">
+   {{# for(var i = 0; i < d.length; i++){ }}
+   <tr>
+      <td>
+      <div class="checkbox-box-s">
+      <input type='checkbox'  class='chk wst-checkbox-s' id="chk-{{i}}" value='{{d[i]['id']}}' /><label for="chk-{{i}}"></label>
+      </div>
+      </td>
+      <td>
+        <p class="goodsName">
+          {{WST.cutStr(d[i]['title'],43)}}
+        </p>
+      </td>
+      <td>{{d[i]['id']}}</td>
+     
+      <td>￥{{d[i]['total_money']}}</td>
+       <td>￥{{d[i]['one_money']}}</td>
+      <td>{{d[i]['start_time']}}</td>
+	  <td>{{d[i]['end_time']}}</td>
+      <td>
+         <a class="g-handle" target='_blank' href='{{WST.U("home/raise/detail","id="+d[i]['id'])}}'>[查看]</a>
+         <!-- <a class="g-handle" href='javascript:toEdit({{d[i]['id']}},"sale")'>[编辑]</a> -->
+         <a class="g-handle" href='javascript:onedel({{d[i]['id']}},"sale")'>[删除]</a>
+      </td>
+   </tr>
+   {{# } }}
+   </script>
+  </table>
+  <div id='pager'></div>
+  <div class="s-menu">
+      <a href='javascript:;' onclick="changeSales(0,'sale')" class="s-sale"><span>下架</span></a>
+    
+      <a href='javascript:void(0);' onclick="raiseDel('sale')" class="s-del"><span>删除</span></a>
+      <a href='{:url("home/raise/addraise")}' class="s-add"><span>新增</span></a>
+   </div> 
+</div>
+{/block}  
+{block name="js"}
+<script type='text/javascript' src='__STYLE__/shops/goods/goods.js?v={$v}'></script>
+<script>
+$(function(){getraise()})
+//众筹列表
+function getraise(p){
+	$('#list').html('<tr><td colspan="11"><img src="'+WST.conf.ROOT+'/wstmart/home/view/default/img/loading.gif">正在加载数据...</td></tr>');
+	var params = {};
+	params = WST.getParams('.s-query');
+	params.key = $.trim($('#key').val());
+	params.page = p;
+	$.post(WST.U('home/raise/getraise'),params,function(data,textStatus){
+		
+	    var json = WST.toJson(data);
+		console.log(json);
+	    if(json.Rows){
+			
+	       	var gettpl = document.getElementById('tblist').innerHTML;
+	       	laytpl(gettpl).render(json.Rows, function(html){
+	       		$('#list').html(html);
+	       		//$('.j-lazyGoodsImg').lazyload({ effect: "fadeIn",failurelimit : 10,skip_invisible : false,threshold: 200,placeholder:window.conf.ROOT+'/'+window.conf.GOODS_LOGO});//商品默认图片
+	       	});
+	       	if(json.TotalPage>1){
+	       		laypage({
+		        	 cont: 'pager', 
+		        	 pages:json.TotalPage, 
+		        	 curr: json.CurrentPage,
+		        	 skin: '#e23e3d',
+		        	 groups: 3,
+		        	 jump: function(e, first){
+		        		    if(!first){
+		        		    	getraise(e.curr);
+		        		    }
+		        	    } 
+		        });
+	       	}else{
+	       		$('#pager').empty();
+	       	}
+       	}  
+	});
+}
+function onedel(id,func){
+	var c = WST.confirm({content:'您确定要删除商品吗?',yes:function(){
+		layer.close(c);
+		var load = WST.load({msg:'正在删除，请稍后...'});
+		$.post(WST.U('home/raise/del'),{id:id},function(data,textStatus){
+		//console.log(data);
+			layer.close(load);
+		    var json = WST.toJson(data);
+		    if(json.status==1){
+		    	getraise(0);
+		    }else{
+		    	WST.msg(json.msg,{icon:2});
+		    }
+		});
+	}});
+}
+function raiseDel(func,flag){
+	if(flag==1){
+		var ids = WST.getChks('.chk1');
+	}else{
+		var ids = WST.getChks('.chk');
+	}
+	
+	if(ids==''){
+		WST.msg('请先选择商品!', {icon: 5});
+		return;
+	}
+	var params = {};
+	params.ids = ids;
+	var load = WST.load({msg:'请稍后...'});
+	$.post(WST.U('home/raise/batchDel'),params,function(data,textStatus){
+		layer.close(load);
+		var json = WST.toJson(data);
+		if(json.status=='1'){
+			WST.msg('操作成功',{icon:1},function(){
+				   $('#all').prop('checked',false);
+				   getraise(0);
+				   /* switch(func){
+		    	   case 'store':storeByPage(0);break;
+		    	   case 'sale':saleByPage(0);break;
+		    	   case 'audit':auditByPage(0);break;
+		    	  } */
+			});
+		}else{
+			WST.msg('操作失败',{icon:5});
+		}
+	});
+}
+// 批量 上架/下架
+function changeSales(i,func){
+	var ids = WST.getChks('.chk');
+	if(ids==''){
+		WST.msg('请先选择商品!', {icon: 5});
+		return;
+	}
+	var params = {};
+	params.ids = ids;
+	params.isSale = i;
+	$.post(WST.U('home/raise/changestatus'), params, function(data,textStatus){
+		var json = WST.toJson(data);
+		if(json.status=='1'){
+			WST.msg('操作成功',{icon:1},(function(){
+			   $('#all').prop('checked',false);
+			   getraise(0);
+			   <!-- switch(func){ -->
+	    	       <!-- case 'store':storeByPage(0);break; -->
+	    	       <!-- case 'sale':saleByPage(0);break; -->
+	    	       <!-- case 'audit':auditByPage(0);break; -->
+	    	  <!-- } -->
+			}));
+	    }else{
+	    	WST.msg('操作失败!', {icon: 5});
+	    }
+	});
+}
+</script>
+{/block}

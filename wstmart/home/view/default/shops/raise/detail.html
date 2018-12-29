@@ -1,0 +1,71 @@
+{extend name="default/shops/base" /}
+{block name="title"}众筹列表-卖家中心{__block__}{/block}
+{block name="content"}
+<div class="wst-shop-head"><span>购买众筹列表</span></div>
+<div class="wst-shop-tbar">
+  <label>
+    <!--商品分类：
+     <select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">
+        <option value="">-请选择-</option>
+      {volist name=":WSTShopCats(0)" id="vo"}
+            <option value="{$vo['catId']}" >{$vo['catName']}</option>
+      {/volist}
+    </select>
+    <select name="cat2" id="cat2" class="s-query"><option value="">-请选择-</option></select> -->
+  </label>
+  <!-- <label>
+    众筹名称：<input type="text" name="goodsName" id="key" class="s-query" />
+	<button class="s-btn" onclick="getraise()">查询</button>
+  </label>
+</div> -->
+<div class="wst-shop-content"> 
+   <!-- <div class="s-menu">
+      <a href='javascript:;' onclick="changeSales(0,'sale')" class="s-sale"><span>下架</span></a>
+     
+      <a href='javascript:void(0);' onclick="raiseDel('sale')" class="s-del"><span>删除</span></a>
+      <a href='{:url("home/raise/addraise")}' class="s-add"><span>新增</span></a>
+   </div> --> 
+   <table class='wst-list'>
+   <thead>
+   <tr>
+     <!-- <th width="10" >
+     <div class="checkbox-box-s checkbox-box-s-all">
+     <input style="margin-left:2px;" class="wst-checkbox-s" onclick="javascript:WST.checkChks(this,'.chk')" type='checkbox' id="all"/>
+     <label for="all"></label>
+     </div>
+     </th> -->
+     <th>众筹名称</th>
+     <th>购买人</th>
+     <th>购买金额</th>
+     <th>购买时间</th>
+   </tr>
+   </thead>
+   <tbody id='list'></tbody>
+   <tfoot>
+     <tr align="center"><td colspan='10' id='pager'></td></tr>
+   </tfoot>
+  {volist name="result" id="vo"}
+  <tr>
+   
+  <td>{$vo.title}</td>
+  <td>{$vo.userid}</td>
+  <td>{$vo.buy_money}</td>
+  <td>{$vo.addtime|date="y-m-d h:i:s",###}</td>
+   
+  </tr>{/volist}
+  </table>
+  <div id='pager'></div>
+  <!-- <div class="s-menu">
+      <a href='javascript:;' onclick="changeSales(0,'sale')" class="s-sale"><span>下架</span></a>
+    
+      <a href='javascript:void(0);' onclick="raiseDel('sale')" class="s-del"><span>删除</span></a>
+      <a href='{:url("home/raise/addraise")}' class="s-add"><span>新增</span></a>
+   </div>  -->
+</div>
+{/block}  
+{block name="js"}
+<script type='text/javascript' src='__STYLE__/shops/goods/goods.js?v={$v}'></script>
+<script>
+
+</script>
+{/block}

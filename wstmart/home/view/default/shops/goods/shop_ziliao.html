@@ -1,0 +1,219 @@
+{extend name="default/shops/base" /}
+{block name="title"}店铺资料-卖家中心{__block__}{/block}
+{block name="content"}
+<style>
+label{margin-right:10px;}
+#specsAttrBox .webuploader-container{width:80px;height:20px;overflow:hidden;}
+</style>
+<div id='tab' class="wst-tab-box">
+	<ul class="wst-tab-nav">
+	   <li>店铺信息</li>
+	   <li>银行信息</li>
+	</ul>
+    <div class="wst-tab-content" style='width:99%;margin-bottom: 10px;'>
+      <form id='editform' autocomplete='off'>
+        <div class="wst-tab-item" style="position: relative;">
+           <table class='wst-form'> 
+			  <tr>
+			     <th width='150'>店铺编号：</th>
+			     <td>{$object['shopSn']}</td>
+			  </tr>
+			  <!-- <tr>
+			     <th>店铺名称：</th>
+			     <td>{$object['shopName']}</td>
+			  </tr>
+			  <tr>
+			     <th>店主姓名：</th>
+			     <td>{$object['shopkeeper']}</td>
+			  </tr>
+			  <tr>
+			     <th>店主联系手机：</th>
+			     <td>{$object['telephone']}</td>
+			  </tr>
+			  <tr>
+			     <th>公司名称：</th>
+			     <td>{$object['shopCompany']}</td>
+			  </tr>
+			  <tr>
+			     <th>店铺联系电话：</th>
+			     <td>{$object['shopTel']}</td>
+			  </tr>
+			  <tr>
+			     <th>经营范围：</th>
+			     <td>{$object['catshopNames']}</td>
+			  </tr> 
+			  <tr>
+			     <th>认证类型：</th>
+			     <td>
+			       {php}$accredLen = count($object['accreds']);{/php}
+			       {volist name="$object['accreds']" id="vo"}
+			       {$vo["accredName"]}{if $i < $accredLen }、{/if}
+			       {/volist}
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>店铺图标：</th>
+			     <td>
+			     <img id='preview' width='150' height='150' src='__ROOT__/{$object["shopImg"]}'/>
+			     </td>
+			  </tr>-->
+			  <tr>
+			     <th>客服QQ：</th>
+			     <td><input class="ipt1" id="shopQQ" type="text" value="{:isset($object['shopQQ'])?$object['shopQQ']:''}" /></td>
+			  </tr>
+			  <!-- <tr>
+			     <th>阿里旺旺：</th>
+			     <td>{$object['shopWangWang']}</td>
+			  </tr> -->
+			  <tr>
+			     <th>店铺地址：</th>
+			     <td>
+				 <select id="barea_1" class='ipt1 j-bareas1' level="0" onchange="WST.ITAreas({id:'barea_1',val:this.value,isRequire:true,className:'j-bareas1'});">
+          <option value="">-请选择-</option>
+          {volist name="areaList" id="vo"}
+          <option value="{$vo['areaId']}">{$vo['areaName']}</option>
+          {/volist}
+       </select>
+			       {:isset($object['areaName'])?$object['areaName']:''}
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>店铺详细地址：</th>
+			     <td>
+				 <input type="text" class="ipt1" id="shopAddress" value="{:isset($object['shopAddress'])?($object['shopAddress']):''}" />
+				 </td>
+			  </tr>
+			  <tr>
+			     <th>是否提供开发票：</th>
+			     <td>
+				 <input type="radio"  id="isInvoice" name="aa" {if $object['isInvoice']==1} checked="checked" {/if} value="1"/>提供发票
+				  <input type="radio" id="isInvoice1" name="aa" {if $object['isInvoice']==0} checked="checked" {/if} value="0"/>不提供发票
+			         
+			     </td>
+			  </tr>
+			  <tr id='trInvoice' {if $object['isInvoice']==0}style='display:none'{/if}>
+			     <th>发票说明：</th>
+			     <td><input type="text" id="invoiceRemarks" class="ipt1" value="{:isset($object['invoiceRemarks'])?($object['invoiceRemarks']):''}"/></td>
+			  </tr>
+			  <tr>
+			     <th>默认运费：</th>
+			     <td>¥<input type="text" id="freight" class="ipt1" value="{:isset($object['freight'])?($object['freight']):''}"/></td>
+			  </tr>
+			  <tr>
+             <td colspan='2' style='text-align:center;padding:20px;'>
+                 <button type="submit" class='s-btn' onclick="saveinfo()">保&nbsp;存</button>&nbsp;&nbsp;
+                 <button type="button" class='s-btn' onclick='javascript:location.reload();'>重&nbsp;置</button>
+             </td>
+           </tr>
+           </table>
+        </div>
+        <div class="wst-tab-item">
+           <table class='wst-form'>
+              <tr>
+			     <th width='150'>开卡银行：</th>
+				 <td>
+       <select class='ipt' id='bankId' data-rule="所属银行: required;">
+          <option value=''>请选择</option>
+          {volist name="bankList" id="vo"}
+          <option value='{$vo["bankId"]}' {if $object['bankId']==$vo['bankId']}selected{/if}>{$vo["bankName"]}</option>
+          {/volist}
+       </select>
+     </td>
+			     <!-- <td><input type="text" value="{:isset($object['bankName'])?$object['bankName']:''}" /></td> -->
+			  </tr>
+			  <tr>
+			     <th width='150'>开卡地区：</th>
+				 <td>
+      <select id="barea_0" class='ipt j-bareas' level="0" onchange="WST.ITAreas({id:'barea_0',val:this.value,isRequire:true,className:'j-bareas'});">
+          <option value="">-请选择-</option>
+          {volist name="areaList" id="vo"}
+          <option value="{$vo['areaId']}">{$vo['areaName']}</option>
+          {/volist}
+       </select>{$areaname}
+    </td>
+			     <!-- <td><input type="text" value="{:isset($object['bankAreaName'])?$object['bankAreaName']:''}" /></td> -->
+			  </tr>
+              <tr>
+			     <th>卡号：</th>
+			     <td><input class="ipt" id="bankNo" type="text" value="{:isset($object['bankNo'])?$object['bankNo']:''}" data-rule="银行卡号: required;" /></td>
+			  </tr>
+			  <tr>
+			     <th>持卡人：</th>
+			     <td><input class="ipt" type="text" id="bankUserName" value="{:isset($object['bankUserName'])?$object['bankUserName']:''}" data-rule="持卡人: required;"/></td>
+			  </tr>
+			  <tr>
+             <td colspan='2' style='text-align:center;padding:20px;'>
+                 <button type="submit" class='s-btn' onclick="savebank()">保&nbsp;存</button>&nbsp;&nbsp;
+                 <button type="button" class='s-btn' onclick='javascript:location.reload();'>重&nbsp;置</button>
+             </td>
+           </tr>
+           </table>
+        </div>
+     </form>
+    </div>
+</div>
+{/block}  
+{block name="js"}
+
+<script type='text/javascript' src='__STATIC__/plugins/webuploader/webuploader.js?v={$v}'></script>
+<script src="__STATIC__/plugins/kindeditor/kindeditor.js?v={$v}" type="text/javascript" ></script>
+<script type="text/javascript" src="__STATIC__/plugins/validator/jquery.validator.js?v={$v}"></script>
+<script type="text/javascript" src="__STATIC__/plugins/validator/local/zh-CN.js?v={$v}"></script><!---->
+
+<script type='text/javascript' src='__STYLE__/shops/goods/goods.js?v={$v}'></script>
+
+
+<script>
+$(function(){
+	$('#tab').TabPanel({tab:0,callback:function(no){}});
+})
+function savebank(){
+			var params = WST.getParams('.ipt');
+			//params.areaId = WST.ITGetAreaVal('j-areas');
+			params.bankAreaId = WST.ITGetAreaVal('j-bareas');
+            //alert(params.bankUserName);
+			var loading = WST.msg('正在提交数据，请稍后...', {icon: 16,time:60000});
+			//alert(params.bankAreaId);return false;
+		    $.post(WST.U('home/Shoprenzheng/editbank'),params,function(data,textStatus){
+                //alert(898989);return false;
+		    	layer.close(loading);
+		    	console.log(data);
+		    	var json = WST.toAdminJson(data);
+              //alert(json.status);
+		    	if(json.status=='1'){
+                  
+		    		WST.msg("操作成功",{icon:1});
+		    		//location.href=WST.U('zuxhiyif/shops/index');
+		    	}else{
+		    		WST.msg(json.msg,{icon:2});
+		    	}
+		    });
+   // alert(333333);
+}
+function saveinfo(){
+    var params = WST.getParams('.ipt1');
+			//params.areaId = WST.ITGetAreaVal('j-areas');
+			params.AreaId = WST.ITGetAreaVal('j-bareas1');
+			var check=$("input[name='aa']:checked").val();
+			params.isInvoice=check;
+            //alert(params.shopAddress);
+			var loading = WST.msg('正在提交数据，请稍后...', {icon: 16,time:60000});
+			//console.log(params);
+		    $.post(WST.U('home/Shoprenzheng/editinfo'),params,function(data,textStatus){
+
+                console.log(data);
+		    	layer.close(loading);
+                //alert(9999996666);
+		    	var json = data;
+//				console.log(json);
+		    	if(json.status=='1'){
+		    		WST.msg("操作成功",{icon:1});
+		    		//location.href=WST.U('zuxhiyif/shops/index');
+		    	}else{
+		    		WST.msg(json.msg,{icon:2});
+		    	}
+		    });
+  //alert(666666);
+}
+</script>
+{/block}

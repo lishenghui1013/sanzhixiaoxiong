@@ -1,0 +1,44 @@
+{extend name="base" /}
+{block name="js"}
+<script src="__ADMIN__/agent/staffsads.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="l-loading" style="display: block" id="wst-loading"></div>
+{if WSTGrant('GGWZ_01')}
+<div class="wst-toolbar">
+   
+   <div style="clear:both"></div>
+</div>
+{/if}
+
+<div id="maingrid"></div>
+<div id='editPassBox' style='display:none;padding-top:5px;'>
+  <form id='editPassFrom' autocomplete="off">
+   <table class='wst-form'>
+      
+      <tr>
+         <th>时间单位：</th>
+         <td>月
+		 <!--<select id='timeunit' class='ipt'>-->
+             <!--<option value="年">年<option/>-->
+             <!--<option value="月">月<option/>-->
+             <!--<option value="日">日<option/>-->
+		 <!--</select>-->
+		 <!-- <input type='password' id='buy_time' name='newPass2' placeholder="年/月/日" class='ipt' data-rule="时间" /> -->
+         </td>
+      </tr>
+	  <tr>
+         <th>广告位价单价：</th>
+         <td><input type='text' id='price' name='newPass'  class='ipt' /></td>
+      </tr>
+	  <tr>
+         <th>广告位收益发放百分比：</th>
+         <td><input type='text' id='proportion' name='newPass'  placeholder="填写范围0~1"  class='ipt' /></td>
+      </tr>
+   </table>
+  </form>
+</div>
+<script>
+  $(function(){initGrid()});
+</script>
+{/block}

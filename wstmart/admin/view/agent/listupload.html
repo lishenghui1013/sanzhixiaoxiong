@@ -1,0 +1,38 @@
+{extend name="base" /}
+{block name="js"}
+<script src="__ADMIN__/agent/ads.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="l-loading" style="display: block" id="wst-loading"></div>
+<div class="wst-toolbar">
+	<!-- <div id="query" style="float:left;">
+		<p style="float:left;height:25px;line-height:25px;">类型:</p>
+			<select style="float:left;" name="positionType" id="positionType" class="query" onChange="addPosition(this.value)">
+				<option value="">请选择</option>
+                {volist name=":WSTDatas(5)" id='vo'}
+                <option value="{$vo['dataVal']}">{$vo['dataName']}</option>
+                {/volist}
+			</select>
+		<p style="float:left;height:25px;line-height:25px;">广告位置:</p>
+			<select style="float:left;" name="adPositionId" id="adPositionId" class="query" >
+				<option value="">请选择</option>
+			</select>
+		
+
+		<input type="button" class="btn btn-blue" onclick="javascript:adsQuery()" value="查询">
+	</div> -->
+   {if WSTGrant('GGGL_01')} 
+   <!--<button class="btn btn-green f-right" onclick="javascript:location.href='<?=url("Agent/toupload","positionid=".$positionid,"positionid=".$positionid)?>'">新增</button>-->
+   <button class="btn btn-green f-right" onclick="javascript:location.href='{:url('Agent/toupload',['positionid'=>$positionid,'shopId'=>$shopId])}'">新增</button>
+   {/if}
+    <input type="hidden" id="positionid" name="adPositionId" class="ipt" value="{$positionid}"/>
+    <input type="hidden" id="shopId" name="shopId" class="ipt" value="{$shopId}"/>
+    <!--<input type="hidden" id="shopId" name="shopId" class="ipt" value="{$shopId}"/>-->
+   <div style="clear:both"></div>
+</div>
+<div id="maingrid"></div>
+<script>
+$(function(){initGrid()});
+</script>
+
+{/block}

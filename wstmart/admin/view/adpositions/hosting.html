@@ -1,0 +1,85 @@
+{extend name="base" /}
+{block name="css"}
+<style>
+#preview img{
+  max-width: 600px;
+  max-height:150px;
+}
+</style>
+
+{/block}
+{block name="js"}
+
+<script src="__ADMIN__/adpositions/adpositions.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="l-loading" style="display: block" id="wst-loading"></div>
+<form id="hostForm">
+<table class='wst-form wst-box-top'>
+ 
+       
+
+<tr>
+          <th>价格<font color='red'>*</font>：</th>
+          <td>
+            <input type="text" style="margin:0px;vertical-align:baseline;" id="price" name="price" class="ipt" maxLength="20" value='' />
+          </td>
+       </tr>
+<tr>
+          <th>单位<font color='red'>*</font>：</th>
+          <td>
+            <input type="text" style="margin:0px;vertical-align:baseline;" id="timeunit" name="timeunit" class="ipt" maxLength="20" value='月' readonly="readonly" />
+          </td>
+       </tr>
+	   <tr>
+          <th>下发收益比例<font color='red'>*</font>：</th>
+          <td>
+            <input type="text" style="margin:0px;vertical-align:baseline;" id="proportion" name="proportion" class="ipt" maxLength="20" value='' />
+          </td>
+       </tr>
+       <tr>
+          <!--<th>托管截止时间<font color='red'>*</font>：</th>-->
+          <th>托管月份<font color='red'>*</font>：</th>
+          <!--<td>-->
+            <!--<input type="text" style="margin:0px;vertical-align:baseline;" id="expiryTime" name="expiryTime" class="ipt" maxLength="20" value='' />-->
+          <!--</td>-->
+           <td>
+           <select id="monthNum"  name="monthNum" class="ipt">
+               <option value="1">1个月</option>
+               <option value="2">2个月</option>
+               <option value="3">3个月</option>
+               <option value="4">4个月</option>
+               <option value="5">5个月</option>
+               <option value="6">6个月</option>
+               <!--<option value="7">7</option>-->
+               <!--<option value="8">8</option>-->
+               <!--<option value="9">9</option>-->
+               <!--<option value="10">10</option>-->
+               <!--<option value="11">11</option>-->
+               <!--<option value="12">12</option>-->
+           </select>
+           </td>
+       </tr>
+      
+  
+  <tr>
+     <td colspan='2' align='center'>
+       <input type="hidden" name="id" id="trpositionId" class="ipt" value="{$apid}" />
+       <input type="submit" value="提交" class='btn btn-blue' />
+       <input type="button" onclick="javascript:history.go(-1)" class='btn' value="返回" />
+     </td>
+  </tr>
+</table>
+</form>
+<script>
+$(function(){
+editInit1();
+
+//时间插件
+$("#adStartDate").ligerDateEditor().setValue('2018-08-09');
+$("#adEndDate").ligerDateEditor().setValue('2018-08-09');
+});
+
+</script>
+{/block}
+

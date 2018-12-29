@@ -1,0 +1,62 @@
+{extend name="base" /}
+{block name="js"}
+<script src="__ADMIN__/userauth/userauth.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="l-loading" style="display: block" id="wst-loading"></div>
+<form autocomplete='off'>
+<input type='hidden' id='idCard_id' class='ipt' value="{$object['idCard_id']}"/>
+<input type='hidden' id='userId' class='ipt' value="{$object['userId']}"/>
+<table class='wst-form wst-box-top'>
+  <tr>
+     <th width='150'>申请人：</th>
+     <td>
+     {$object['loginName']}
+     </td>
+  </tr>
+    <tr>
+        <th width='150'>手机号：</th>
+        <td>
+            {$object['userPhone']}
+        </td>
+    </tr>
+
+    <tr>
+        <th valign='top'>身份证正面：</th>
+        <td>
+            <div class="photo"><img src="__ROOT__/{$object['zhengUrl']}"></div>
+        </td>
+    </tr>
+    <tr>
+    <th valign='top'>身份证反面：</th>
+    <td>
+        <div class="photo"><img src="__ROOT__/{$object['fanUrl']}"></div>
+    </td>
+</tr>
+
+  <tr>
+     <th>处理结果<font color='red'>*</font>：</th>
+     <td>
+        <label>
+           <input type='radio' class='ipt' name='idCardStatus' id='applyStatus0' value='3' onclick='javascript:WST.showHide(1,"#tr")'/>申请失败
+        </label>
+        <label>
+           <input type='radio' class='ipt' name='idCardStatus' id='applyStatus1' value='2' onclick='javascript:WST.showHide(0,"#tr")' data-rule="checked"/>申请成功
+        </label>
+     </td>
+  </tr>
+  <tr id='tr' style='display:none'>
+     <th valign='top'>失败原因<font color='red'>*</font>：</th>
+     <td>
+       <textarea id='handleDesc' class='ipt' style='width:70%;height:80px;' data-rule="失败原因: required;"></textarea>
+     </td>
+  </tr>
+  <tr>
+     <td colspan='2' align='center'>
+       <input type='button' value='保存' class='btn btn-blue' onclick='javascript:save()'>
+       <input type='button' value='返回' class='btn' onclick='javascript:history.go(-1)'>
+     </td>
+  </tr>
+</table>
+</form>
+{/block}
