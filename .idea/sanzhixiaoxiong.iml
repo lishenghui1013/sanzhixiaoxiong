@@ -7,11 +7,9 @@
     <orderEntry type="module-library">
       <library name="PHP" type="php">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../education" />
           <root url="file://$MODULE_DIR$/../jiceng" />
         </CLASSES>
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../education" />
           <root url="file://$MODULE_DIR$/../jiceng" />
         </SOURCES>
       </library>
